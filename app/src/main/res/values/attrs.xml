@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MyViewPager">
+        <attr name="canScroll" format="boolean" />
+    </declare-styleable>
+
+
+    <declare-styleable name="LetterSideBarView">
+        <!--有效内容背景-->
+        <attr name="backgroundColor" format="color"/>
+        <!--描边-->
+        <attr name="strokeColor" format="color"/>
+        <!--文字颜色-->
+        <attr name="textColor" format="color"/>
+        <!--文字大小-->
+        <attr name="textSize" format="dimension"/>
+        <!--选中文字颜色-->
+        <attr name="selectTextColor" format="color"/>
+        <!--选中文字大小-->
+        <attr name="selectTextSize" format="dimension"/>
+        <!--选中时提示文字颜色-->
+        <attr name="hintTextColor" format="color"/>
+        <!--选中时提示文字大小-->
+        <attr name="hintTextSize" format="dimension"/>
+        <!--选中时提示圆形半径-->
+        <attr name="hintCircleRadius" format="dimension"/>
+        <!--选中时提示圆形颜色-->
+        <attr name="hintCircleColor" format="color"/>
+        <!--选中时波浪颜色-->
+        <attr name="waveColor" format="color"/>
+        <!--选中时波浪半径-->
+        <attr name="waveRadius" format="dimension"/>
+        <!--里面文字上+下padding-->
+        <attr name="contentPadding" format="dimension"/>
+        <!--上+下+右padding-->
+        <attr name="barPadding" format="dimension"/>
+        <!--宽度-->
+        <attr name="barWidth" format="dimension"/>
+    </declare-styleable>
+
+
+    <string-array name="side_bar_value_list">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+        <item>F</item>
+        <item>G</item>
+        <item>H</item>
+        <item>I</item>
+        <item>J</item>
+        <item>K</item>
+        <item>L</item>
+        <item>M</item>
+        <item>N</item>
+        <item>O</item>
+        <item>P</item>
+        <item>Q</item>
+        <item>R</item>
+        <item>S</item>
+        <item>T</item>
+        <item>U</item>
+        <item>V</item>
+        <item>W</item>
+        <item>X</item>
+        <item>Y</item>
+        <item>Z</item>
+        <item>\u0023</item><!-- #-->
+    </string-array>
+
+</resources>

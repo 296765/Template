@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Template</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确定</string>
+    <string name="alumb">相册</string>
+    <string name="camera">拍照</string>
+    <string name="permission_refused">您拒绝了%1$s的权限，请到设置中修改</string>
+</resources>
