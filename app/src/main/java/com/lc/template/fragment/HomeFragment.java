@@ -1,7 +1,19 @@
 package com.lc.template.fragment;
 
+import android.Manifest;
+import android.app.Activity;
+
+import com.lc.template.R;
+import com.lc.template.activity.LoginActivity;
 import com.lc.template.base.BaseVBFragment;
 import com.lc.template.databinding.FragHomeBinding;
+import com.lc.template.dialog.DialogUtils;
+import com.lc.template.utils.ActivityCollector;
+import com.lc.template.utils.Y;
+import com.lc.template.utils.picker.OnItemViewClickCallBack;
+import com.lc.template.utils.picker.PickerType;
+import com.lc.template.utils.picker.PickerViewTool;
+import com.lc.template.view.selectPic.HorizontalPicSelector;
 
 /**
  * Created by Wei Ting
@@ -11,7 +23,44 @@ import com.lc.template.databinding.FragHomeBinding;
 public class HomeFragment extends BaseVBFragment<FragHomeBinding> {
     @Override
     protected void initView() {
+        binding.tvTitle.setOnClickListener(v ->
+                        PickerViewTool.showPickerView(getContext(), null, PickerType.SEX, "asdf", "", new OnItemViewClickCallBack() {
+                            @Override
+                            public void onItemViewClickCallBack(int position, String type, Object object) {
+
+                            }
+                        })
+//                        MToast.show("result.message")
+//                UpdateVersionActivity.actionStart("bean.getMsg()", true,CommonAppContext.getInstance())
+
+        );
+
+        binding.picSelector.setListener(new HorizontalPicSelector.OnClick() {
+            @Override
+            public void onAddClick() {
+                showPhotoDialog();
+            }
+        });
 
 
+    }
+
+
+    //选择图片
+    private void showPhotoDialog() {
+        Y.showNotification((Activity) getContext(), Manifest.permission.CAMERA, getResources().getString(R.string.pic_tags));
+
+        DialogUtils.showStringArrayDialog(getContext(), new Integer[]{R.string.alumb, R.string.camera}, new DialogUtils.StringArrayDialogCallback() {
+            @Override
+            public void onItemClick(String text, int tag) {
+                if (tag == R.string.camera) {
+                    //相机拍照
+                    binding.picSelector.openCamera();
+                } else {
+                    //选择相册
+                    binding.picSelector.openGallery();
+                }
+            }
+        });
     }
 }

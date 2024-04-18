@@ -11,6 +11,7 @@ import androidx.viewbinding.ViewBinding;
 import com.gyf.immersionbar.ImmersionBar;
 import com.lc.template.custom.LifeCycleListener;
 import com.lc.template.dialog.LordingDialog;
+import com.lc.template.utils.ActivityCollector;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -33,6 +34,8 @@ public abstract  class BaseVBActivity<VB extends ViewBinding> extends AppCompatA
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
+        //在活动管理器添加当前Activity
+        ActivityCollector.addActivity(this);
         initBar();
         initLifeListener();
         Type superclass = getClass().getGenericSuperclass();
@@ -75,6 +78,8 @@ public abstract  class BaseVBActivity<VB extends ViewBinding> extends AppCompatA
             mLifeCycleListeners.clear();
             mLifeCycleListeners = null;
         }
+        //从活动管理器删除当前Activity
+        ActivityCollector.removeActivity(this);
         super.onDestroy();
     }
 

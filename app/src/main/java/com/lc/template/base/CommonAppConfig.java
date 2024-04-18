@@ -6,9 +6,7 @@ import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.lc.template.model.UserinfoBean;
-import com.lc.template.utils.Constants;
 import com.lc.template.utils.SpUtil;
-import com.lc.template.utils.WordUtil;
 import com.lc.template.utils.Y;
 
 import java.io.File;
@@ -23,33 +21,29 @@ import java.util.Map;
  */
 public class CommonAppConfig {
 
-    public static final String PACKAGE_NAME = "com.lc.template";
-
     //Http请求头 Header
     public static final Map<String, String> HEADER = new HashMap<>();
-
     //域名
     public static final String HOST = getHost();
-    //public static final String HOST = getHost();
-
     //外部sd卡
     public static final String DCMI_PATH = getOutPath();
     //内部存储 /data/data/<application package>/files目录
     public static final String INNER_PATH = CommonAppContext.getInstance().getFilesDir().getAbsolutePath();
     //文件夹名字
-    private static final String DIR_NAME = "zhibo";
+    private static final String DIR_NAME = "Template";
     //拍照时图片保存路径
     public static final String CAMERA_IMAGE_PATH = DCMI_PATH + "/" + DIR_NAME + "/camera/";
-    //log保存路径
-    public static final String LOG_PATH = DCMI_PATH + "/" + DIR_NAME + "/log/";
 
-    public static final String GIF_PATH = INNER_PATH + "/gif/";
-    public static final String WATER_MARK_PATH = INNER_PATH + "/water/";
 
-    //是否登录
-    private boolean misLogin = false;
-    //是否同意协议
-    private boolean ishaveAgree = false;
+    private static String getHost() {
+        String host ;//
+        if (Constants.openFormal) {
+            host = "";//正式服务器地址
+        } else {
+            host = "";//测试服务器地址
+        }
+        return host;
+    }
 
     private static String getOutPath() {
         String outPath = null;
@@ -72,10 +66,6 @@ public class CommonAppConfig {
 
     private static CommonAppConfig sInstance;
 
-    private CommonAppConfig() {
-
-    }
-
     public static CommonAppConfig getInstance() {
         if (sInstance == null) {
             synchronized (CommonAppConfig.class) {
@@ -87,6 +77,8 @@ public class CommonAppConfig {
         return sInstance;
     }
 
+    private boolean misLogin = false; //是否登录
+    private boolean mAgreen=false; //是否同意协议
     private String mUid;
     private String mToken;
     private double mLng;
@@ -95,9 +87,6 @@ public class CommonAppConfig {
     private String mCity;//市
     private String mDistrict;//区
     private String mVersion;
-    private boolean mLaunched;//App是否启动了
-
-    private boolean mFrontGround;
     private int mAppIconRes;
     private String mAppName;
     private UserinfoBean mUserBean;
@@ -212,11 +201,6 @@ public class CommonAppConfig {
         return mUserBean;
     }
 
-
-
-
-
-
     /**
      * 设置登录信息
      */
@@ -240,8 +224,7 @@ public class CommonAppConfig {
         mUid = null;
         mToken = null;
         SpUtil.getInstance().removeValue(
-                SpUtil.UID, SpUtil.TOKEN, SpUtil.USER_INFO, SpUtil.IM_LOGIN,
-                Constants.CASH_ACCOUNT_ID, Constants.CASH_ACCOUNT, Constants.CASH_ACCOUNT_TYPE
+                SpUtil.UID, SpUtil.TOKEN, SpUtil.USER_INFO, SpUtil.IM_LOGIN
         );
     }
 
@@ -294,7 +277,7 @@ public class CommonAppConfig {
         if (TextUtils.isEmpty(mVersion)) {
             try {
                 PackageManager manager = CommonAppContext.getInstance().getPackageManager();
-                PackageInfo info = manager.getPackageInfo(PACKAGE_NAME, 0);
+                PackageInfo info = manager.getPackageInfo(Constants.PACKAGE_NAME, 0);
                 mVersion = info.versionName;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -303,20 +286,13 @@ public class CommonAppConfig {
         return mVersion;
     }
 
-    public static boolean isYunBaoApp() {
-        if (!TextUtils.isEmpty(PACKAGE_NAME)) {
-            return PACKAGE_NAME.contains("com.lc.template");
-        }
-        return false;
-    }
-
     /**
      * 获取App名称
      */
     public String getAppName() {
         if (TextUtils.isEmpty(mAppName)) {
             int res = CommonAppContext.getInstance().getResources().getIdentifier("app_name", "string", "com.lc.template");
-            mAppName = WordUtil.getString(res);
+            mAppName = Y.getString(res);
         }
         return mAppName;
     }
@@ -333,11 +309,7 @@ public class CommonAppConfig {
     }
 
 
-    private static String getHost() {
-        String host = "";//正式服务器地址
-//        String host = "";//测试服务器地址
-        return host;
-    }
+
 
     /**
      * 判断某APP是否安装
@@ -355,43 +327,15 @@ public class CommonAppConfig {
         return false;
     }
 
-    public boolean isLaunched() {
-        return mLaunched;
+    public void setAgree(boolean agreen) {
+        SpUtil.getInstance().setBooleanValue(SpUtil.ishaveAgree, agreen);
+        mAgreen = agreen;
     }
-
-    public void setLaunched(boolean launched) {
-        mLaunched = launched;
-    }
-
-    public boolean getHaveAgree() {
-        return ishaveAgree;
-    }
-
-    public void setHaveAgree(boolean haveAgree) {
-        ishaveAgree = haveAgree;
-    }
-
-    //app是否在前台
-    public boolean isFrontGround() {
-        return mFrontGround;
-    }
-
-    //app是否在前台
-    public void setFrontGround(boolean frontGround) {
-        mFrontGround = frontGround;
-    }
-
-    public void setLogin(boolean isLogin) {
-        misLogin = isLogin;
-    }
-
-    public boolean isLogin() {
-        if (!TextUtils.isEmpty(CommonAppConfig.getInstance().getUid())) {
-            misLogin = true;
-        } else {
-            misLogin = false;
-        }
-        return misLogin;
+    public boolean getAgree() {
+//        if (TextUtils.isEmpty(mAgreen)) {
+//            mAgreen = SpUtil.getInstance().getBooleanValue(SpUtil.ishaveAgree);
+//        }
+        return mAgreen= SpUtil.getInstance().getBooleanValue(SpUtil.ishaveAgree);
     }
 
 }

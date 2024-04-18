@@ -35,7 +35,6 @@ public class MyHttpUtil {
 
     public static PostRequest<String> postWithId(String serviceName) {
         PostRequest<String> request = OkGo.post(CommonAppConfig.HOST + serviceName);
-//        request.params("user_id", CommonAppConfig.getInstance().getUid());
         request.cacheKey("cacheKey").cacheMode(CacheMode.DEFAULT);
         request.headers("token", CommonAppConfig.getInstance().getToken());
         return request;

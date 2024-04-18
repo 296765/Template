@@ -21,5 +21,9 @@
     <color name="color_9">#999999</color>
     <color name="bg_app">#F1F1F1</color>
     <color name="line">#EEEEEE</color>
+    <color name="color_f6">#F6F6F6</color>
+    <color name="text_gray_dark">#AFAFAF</color>
 
+    <color name="text_black">#1E1E1E</color>
+    <color name="line_light">#ECECEC</color>
 </resources>

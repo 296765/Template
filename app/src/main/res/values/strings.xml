@@ -5,4 +5,8 @@
     <string name="alumb">相册</string>
     <string name="camera">拍照</string>
     <string name="permission_refused">您拒绝了%1$s的权限，请到设置中修改</string>
+
+    <string name="pic_tags">艾庭卷面分需要获取您的相机与存储权限用于您在拍摄照片或选择相册照片用于上传图片</string>
+    <string name="video_tags">艾庭卷面分需要获取您的相机与存储权限用于您在拍摄视频或选择相册视频用于上传视频</string>
+
 </resources>

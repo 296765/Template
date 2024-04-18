@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.lc.template.activity.LoginInvalidActivity;
 import com.lc.template.base.CommonAppConfig;
 import com.lc.template.base.CommonAppContext;
+import com.lc.template.base.Constants;
 import com.lc.template.utils.Y;
 import com.lzy.okgo.callback.AbsCallback;
 import com.lzy.okgo.model.Response;
@@ -26,13 +27,12 @@ public abstract class HttpCallTokenback extends AbsCallback<String> {
     @Override
     public void onSuccess(Response<String> response) {
         JsonBean bean = JSON.parseObject(response.body(), JsonBean.class);
-
-        if (bean.getCode() == 0) {
+        if (bean.getCode() == Constants.CODE_SUCCEED) {
             Headers handle=response.headers();
             CommonAppConfig.getInstance().setLoginInfo("1",  handle.get("token"), true);
             onSuccess(response.body(), bean.getMessage());
             onFinish(bean.getMessage());
-        }  else if (bean.getCode() == 406) {
+        }  else if (bean.getCode() == Constants.CODE_LOGIN) {
             LoginInvalidActivity.actionStart(bean.getMessage(), CommonAppContext.getInstance());
         }else {
             onError(bean.getMessage());

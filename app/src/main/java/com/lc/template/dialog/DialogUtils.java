@@ -1,4 +1,4 @@
-package com.lc.template.model;
+package com.lc.template.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lc.template.R;
+import com.lc.template.utils.DisplayUtil;
 import com.lc.template.utils.Y;
 
 
@@ -42,7 +43,7 @@ public class DialogUtils {
         };
         for (int i = 0, length = array.length; i < length; i++) {
             TextView textView = new TextView(context);
-            textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Y.dp2px(50)));
+            textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DisplayUtil.dp2px(50)));
             textView.setTextColor(0xff323232);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             textView.setGravity(Gravity.CENTER);
@@ -52,7 +53,7 @@ public class DialogUtils {
             container.addView(textView);
             if (i != length - 1) {
                 View v = new View(context);
-                v.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Y.dp2px(1)));
+                v.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DisplayUtil.dp2px(1)));
                 v.setBackgroundColor(0xfff5f5f5);
                 container.addView(v);
             }

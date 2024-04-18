@@ -1,5 +1,6 @@
 package com.lc.template.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.text.TextUtils;
@@ -11,14 +12,14 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import com.blankj.utilcode.util.SPUtils;
+import com.lc.template.R;
 import com.lc.template.base.CommonAppContext;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
+import per.goweii.layer.core.Layer;
+import per.goweii.layer.design.material.MaterialNotificationLayer;
 
 /**
  * Created by Wei Ting
@@ -69,6 +70,9 @@ public class Y {
     }
 
     public static String getString(int resId) {
+        if(resId==0){
+            return "";
+        }
         return getResources().getString(resId);
     }
 
@@ -125,164 +129,6 @@ public class Y {
         }
     }
 
-
-    public static String formatNum(float num) {
-        String format = new DecimalFormat("#.#").format(num);
-        return format;
-    }
-
-    public static String formatNum(Double num) {
-        String format = new DecimalFormat("#.#").format(num);
-        return format;
-    }
-
-    /**
-     * 获取Money
-     */
-    public static String getMoney(double money) {
-        String format = new DecimalFormat("#.##").format(money);
-        return format;
-    }
-
-    /**
-     * 获取Money
-     */
-    public static String getMoney(float money) {
-        String format = new DecimalFormat("#.##").format(money);
-        return format;
-    }
-
-    /**
-     * 获取Money
-     */
-    public static BigDecimal getMoneyB(String money) {
-        BigDecimal bigDecimal = new BigDecimal(money);
-        return bigDecimal;
-    }
-
-
-    /**
-     * 获得屏幕高度
-     *
-     * @param context
-     * @return
-     */
-    public static int getScreenWidth(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        wm.getDefaultDisplay().getMetrics(outMetrics);
-        return outMetrics.widthPixels;
-    }
-
-    /**
-     * 获得屏幕宽度
-     *
-     * @param context
-     * @return
-     */
-    public static int getScreenHeight(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        wm.getDefaultDisplay().getMetrics(outMetrics);
-        return outMetrics.heightPixels;
-    }
-
-    /**
-     * 获得控件高度
-     *
-     * @param context
-     * @return
-     */
-    public static int getViewHeght(View view, Context context) {
-        int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        view.measure(w, h);
-        int height = view.getMeasuredHeight();
-        return height;
-    }
-
-    /**
-     * 获得控件宽度
-     *
-     * @param context
-     * @return
-     */
-    public static int getViewWidth(View view, Context context) {
-        int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        view.measure(w, h);
-        int width = view.getMeasuredWidth();
-        return width;
-    }
-
-    public static void setViewMarginTop(View view, int top) {
-        ViewGroup.MarginLayoutParams p = getViewMarginLayoutParams(view);
-        if (p != null) {
-            p.topMargin = top;
-            view.setLayoutParams(p);
-        }
-    }
-
-    public static void setViewMarginLeft(View view, int left) {
-        ViewGroup.MarginLayoutParams p = getViewMarginLayoutParams(view);
-        if (p != null) {
-            p.leftMargin = left;
-            view.setLayoutParams(p);
-        }
-    }
-
-    public static void setViewMarginBottom(View view, int bottom) {
-        ViewGroup.MarginLayoutParams p = getViewMarginLayoutParams(view);
-        if (p != null) {
-            p.bottomMargin = bottom;
-            view.setLayoutParams(p);
-        }
-    }
-
-    public static void setViewMarginRight(View view, int right) {
-        ViewGroup.MarginLayoutParams p = getViewMarginLayoutParams(view);
-        if (p != null) {
-            p.rightMargin = right;
-            view.setLayoutParams(p);
-        }
-    }
-
-    public static boolean setViewHeight(View view, int height) {
-        ViewGroup.LayoutParams params = view.getLayoutParams();
-        if (params != null) {
-            if (params.height != height) {
-                params.height = height;
-                view.setLayoutParams(params);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean setViewWidth(View view, int width) {
-        ViewGroup.LayoutParams params = view.getLayoutParams();
-        if (params != null) {
-            if (params.width != width) {
-                params.width = width;
-                view.setLayoutParams(params);
-            }
-            return true;
-        }
-        return false;
-    }
-
-
-    public static ViewGroup.MarginLayoutParams getViewMarginLayoutParams(View view) {
-        ViewGroup.MarginLayoutParams result = null;
-        if (view != null) {
-            ViewGroup.LayoutParams params = view.getLayoutParams();
-            if (params != null && params instanceof ViewGroup.MarginLayoutParams) {
-                result = (ViewGroup.MarginLayoutParams) params;
-            }
-        }
-        return result;
-    }
-
     /**
      * 隐藏输入法
      *
@@ -300,45 +146,35 @@ public class Y {
     }
 
     /**
-     * 获取日期
+     * 通知-权限
      */
-    public static Date getData(String date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        try {
-            Date parse = format.parse(date);
-            return parse;
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return new Date();
+    public static void showNotification(Activity activity, String permissionName, String title) {
+        String activityName = activity.getClass().getSimpleName();
+        boolean isNotification = SPUtils.getInstance().getBoolean(activityName + permissionName);
+        if (!isNotification) {
+            new MaterialNotificationLayer(activity)
+                    .setIcon(R.mipmap.logo)
+                    .setLabel(R.string.app_name)
+                    .setTitle("设备权限使用说明")
+//                    .setDesc("用于设备识别,进行信息推送和保障等功能。")
+                    .setDesc(title)
+                    .setTimePattern("yyyy-MM-dd")
+                    .addOnDismissListener(new Layer.OnDismissListener() {
+                        @Override
+                        public void onPreDismiss(@NonNull Layer layer) {
+
+                        }
+
+                        @Override
+                        public void onPostDismiss(@NonNull Layer layer) {
+                            SPUtils.getInstance().put(activityName + permissionName, true);
+                        }
+                    })
+                    .show();
         }
     }
 
-    /**
-     * 获取日期精确到秒
-     */
-    public static String getDataS(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        format.setTimeZone(TimeZone.getTimeZone("GMT+08"));
-        return format.format(date);
-    }
 
-    /**
-     * 获取日期精确
-     */
-    public static String getData(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        format.setTimeZone(TimeZone.getTimeZone("GMT+08"));
-        return format.format(date);
-    }
-
-    private static float scale;
-
-    static {
-        scale = CommonAppContext.getInstance().getResources().getDisplayMetrics().density;
-    }
-    public static int dp2px(int dpVal) {
-        return (int) (scale * dpVal + 0.5f);
-    }
 
 
 }

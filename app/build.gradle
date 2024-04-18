@@ -43,7 +43,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     // 状态栏
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
-    
+
     //使用Glide加载图片
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     //下拉刷新上拉加载
@@ -70,12 +70,20 @@ dependencies {
     implementation 'com.tencent:mmkv:1.2.13'
     //防崩溃
     implementation 'cat.ereza:customactivityoncrash:2.4.0'
-    //图片剪裁
-    implementation 'com.github.yalantis:ucrop:2.2.2'
     //鲁班压缩图片
     implementation 'top.zibin:Luban:1.1.8'
-
-
-
+    //一个基于Glide的transformation库,拥有裁剪,着色,模糊,滤镜等多种转换效果
+    implementation 'jp.wasabeef:glide-transformations:3.1.1'
+    // 悬浮层 完整引入
+    implementation "com.github.goweii:Layer:1.0.6"
+    //图片选择器
+    implementation 'io.github.lucksiege:pictureselector:v2.7.0-rc02'
+    //bugly   其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如4.0.3
+    implementation 'com.tencent.bugly:crashreport:latest.release'
+    //三级联动
+    implementation 'com.contrarywind:Android-PickerView:4.1.9'
+    //liveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0"
+    implementation 'com.kunminx.arch:unpeek-livedata:7.6.0'
 
 }

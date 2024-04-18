@@ -10,6 +10,8 @@ import androidx.multidex.MultiDexApplication;
 import com.blankj.utilcode.util.Utils;
 import com.bulong.rudeness.RudenessScreenHelper;
 import com.lc.template.BuildConfig;
+import com.lc.template.bugly.BuglyManager;
+import com.lc.template.utils.MToast;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -54,10 +56,13 @@ public class CommonAppContext extends MultiDexApplication {
         new RudenessScreenHelper(this, designWidth).activate();
 
         SharedPreferences preferences = getSharedPreferences("haveAgree", Context.MODE_PRIVATE);
-        haveAgree = preferences.getBoolean("haveAgree", false);
         initOkGo();
 
         if (haveAgree) {
+
+        }
+        if (CommonAppConfig.getInstance().getAgree()) {
+            BuglyManager.init(this, Constants.Bugly_appid, true);
 
         }
     }
@@ -69,7 +74,7 @@ public class CommonAppContext extends MultiDexApplication {
         DialogLoader.getInstance().setIDialogStrategy(new AlertDialogStrategy());
 
         Utils.init(this);
-
+        MToast.init(this);
         MMKV.initialize(this);
 
 

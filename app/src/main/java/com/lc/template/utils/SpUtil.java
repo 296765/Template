@@ -33,7 +33,7 @@ public class SpUtil {
     public static final String LOCATION_DISTRICT = "locationDistrict";
     public static final String MH_BEAUTY_ENABLE = "mhBeautyEnable";
     public static final String BRIGHTNESS = "brightness";//亮度
-
+    public static final String ishaveAgree = "agreen";//是否同意协议
 
     private SpUtil() {
         mSharedPreferences = CommonAppContext.getInstance().getSharedPreferences("Daoxi_share", Context.MODE_PRIVATE);
