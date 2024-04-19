@@ -26,4 +26,6 @@
 
     <color name="text_black">#1E1E1E</color>
     <color name="line_light">#ECECEC</color>
+    <color name="blue">#6eafea</color>
+
 </resources>

@@ -45,7 +45,7 @@
             android:name="ScopedStorage"
             android:value="true" />
         <activity
-            android:name="com.lc.template.MainActivity"
+            android:name="com.lc.template.activity.WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -64,9 +64,15 @@
             android:name="notch.config"
             android:value="portrait|landscape" />
 
+        <!--引导页-->
+        <activity
+            android:name=".activity.GuideActivity"
+            android:launchMode="singleTask" />
 
-
-        <!--登录-->
+        <!--主页面-->
+        <activity
+            android:name="com.lc.template.MainActivity"
+            android:launchMode="singleTask"/><!--登录-->
         <activity
             android:name="com.lc.template.activity.LoginActivity"
             android:launchMode="singleTask"/>

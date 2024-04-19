@@ -79,6 +79,7 @@ public class CommonAppConfig {
 
     private boolean misLogin = false; //是否登录
     private boolean mAgreen=false; //是否同意协议
+    private String mGuide="";//引导页
     private String mUid;
     private String mToken;
     private double mLng;
@@ -337,5 +338,19 @@ public class CommonAppConfig {
 //        }
         return mAgreen= SpUtil.getInstance().getBooleanValue(SpUtil.ishaveAgree);
     }
+    /**
+     * 校区 id
+     */
+    public void setGuide(String Guide) {
+        SpUtil.getInstance().setStringValue(SpUtil.Guide, Guide);
+        mGuide = Guide;
+    }
 
+
+    public String getGuide() {
+        if (TextUtils.isEmpty(mGuide)) {
+            mGuide = SpUtil.getInstance().getStringValue(SpUtil.Guide);
+        }
+        return mGuide == null ? "" : mGuide;
+    }
 }

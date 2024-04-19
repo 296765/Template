@@ -1,5 +1,8 @@
 package com.lc.template;
 import androidx.fragment.app.Fragment;
+
+import android.content.Context;
+import android.content.Intent;
 import android.os.SystemClock;
 import android.view.KeyEvent;
 import com.lc.template.base.BaseVBActivity;
@@ -17,6 +20,14 @@ public class MainActivity extends BaseVBActivity<ActivityMainBinding> {
    private HomeFragment homeFragment;
     private MessageFragment messageFragment;
     private MineFragment mineFragment;
+    /**
+     * 用于其他Activty跳转到该Activity
+     */
+    public static void actionStart(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(intent);
+    }
     @Override
     protected void initView() {
         select(0);

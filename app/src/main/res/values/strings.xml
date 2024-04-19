@@ -8,5 +8,6 @@
 
     <string name="pic_tags">艾庭卷面分需要获取您的相机与存储权限用于您在拍摄照片或选择相册照片用于上传图片</string>
     <string name="video_tags">艾庭卷面分需要获取您的相机与存储权限用于您在拍摄视频或选择相册视频用于上传视频</string>
+    <string name="agreement">请您务必审慎阅读、充分理解“隐私政策”各条款。如果您同意，请点击“同意”开始接受我们的服务。</string>
 
 </resources>
