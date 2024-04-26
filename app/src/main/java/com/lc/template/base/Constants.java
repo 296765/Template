@@ -13,7 +13,7 @@ public class Constants {
     //正式&测试地址切换  默认测试
     public static final boolean openFormal = false;
     //
-    public static final int CODE_SUCCEED = 200;
+    public static final int CODE_SUCCEED = 1;
     //
     public static final int CODE_LOGIN = 0;
 

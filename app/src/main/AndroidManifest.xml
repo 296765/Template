@@ -29,7 +29,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.VIBRATE" />
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /><!-- 悬浮窗权限 -->
     <application
         android:name="com.lc.template.base.CommonAppContext"
         android:allowBackup="true"
@@ -72,7 +72,8 @@
         <!--主页面-->
         <activity
             android:name="com.lc.template.MainActivity"
-            android:launchMode="singleTask"/><!--登录-->
+            android:launchMode="singleTask"/>
+        <!--登录-->
         <activity
             android:name="com.lc.template.activity.LoginActivity"
             android:launchMode="singleTask"/>

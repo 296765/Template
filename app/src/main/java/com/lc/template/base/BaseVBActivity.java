@@ -1,6 +1,7 @@
 package com.lc.template.base;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
@@ -9,9 +10,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewbinding.ViewBinding;
 
 import com.gyf.immersionbar.ImmersionBar;
+import com.lc.template.R;
+import com.lc.template.custom.CustomUpdateParser;
+import com.lc.template.custom.CustomUpdatePrompter;
 import com.lc.template.custom.LifeCycleListener;
 import com.lc.template.dialog.LordingDialog;
 import com.lc.template.utils.ActivityCollector;
+import com.xuexiang.xupdate.XUpdate;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -177,5 +182,14 @@ public abstract  class BaseVBActivity<VB extends ViewBinding> extends AppCompatA
                 e.printStackTrace();
             }
         }
+    }
+    protected void update() {
+        XUpdate.newBuild(this).updateUrl("http://at.bx8023.top/api/index/androidInfo").updateParser(new CustomUpdateParser()) //设置自定义的版本更新解析器
+//                .updatePrompter(new CustomUpdatePrompter())
+        .promptThemeColor(Color.parseColor("#D20011"))
+                .promptButtonTextColor(Color.parseColor("#ffffff"))
+                .promptTopResId(R.mipmap.logo)
+                .promptWidthRatio(0.7F)
+                .update();
     }
 }
